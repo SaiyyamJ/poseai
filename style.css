@@ -1,0 +1,76 @@
+body{
+    margin:0;
+    font-family:Arial, Helvetica, sans-serif;
+    background:#0f172a;
+    color:white;
+    text-align:center;
+}
+
+header{
+    background:#1e293b;
+    padding:40px;
+}
+
+nav{
+    background:#020617;
+    padding:15px;
+}
+
+nav a{
+    color:#60a5fa;
+    margin:15px;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+section{
+    padding:60px 20px;
+}
+
+.demo-container{
+    position:relative;
+    width:640px;
+    margin:auto;
+}
+
+video{
+    width:640px;
+    transform:scaleX(-1);
+}
+
+canvas{
+    position:absolute;
+    left:0;
+    top:0;
+    width:640px;
+    transform:scaleX(-1);
+}
+
+#feedback{
+    font-size:22px;
+    margin-top:20px;
+    color:#22c55e;
+}
+
+footer{
+    background:#020617;
+    padding:20px;
+    margin-top:40px;
+}
+.stats{
+    display:flex;
+    justify-content:center;
+    gap:40px;
+    margin-top:20px;
+}
+
+.card{
+    background:#1e293b;
+    padding:20px 40px;
+    border-radius:15px;
+    font-size:20px;
+}
+
+#progressChart{
+    margin-top:40px;
+}

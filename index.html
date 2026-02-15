@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PoseAI – Virtual Gym Trainer</title>
+
+<link rel="stylesheet" href="style.css">
+
+<script src="https://cdn.jsdelivr.net/npm/@mediapipe/pose"></script>
+<script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils"></script>
+<script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils"></script>
+
+</head>
+
+<body>
+
+<header>
+    <h1>PoseAI</h1>
+    <p>AI Based Gym Form Correction System</p>
+</header>
+
+<nav>
+    <a href="#about">About</a>
+    <a href="#demo">Live Demo</a>
+    <a href="#features">Features</a>
+    <a href="#team">Team</a>
+</nav>
+
+<section id="about">
+<h2>About PoseAI</h2>
+<p>
+PoseAI is a virtual fitness trainer that analyzes human posture using AI.
+It detects incorrect form during exercises and gives real-time feedback using webcam.
+</p>
+</section>
+
+<section id="demo">
+<h2>Live Posture Detection Demo</h2>
+
+<div class="demo-container">
+    <video class="input_video"></video>
+    <canvas class="output_canvas"></canvas>
+</div>
+
+<p id="feedback">Stand in front of the camera</p>
+
+</section>
+
+<section id="features">
+<h2>Features</h2>
+<ul>
+<li>Real-time posture correction</li>
+<li>AI pose estimation using MediaPipe</li>
+<li>Joint angle calculation</li>
+<li>Adaptive feedback</li>
+<li>Works without sensors</li>
+</ul>
+</section>
+<section id="dashboard">
+<h2>Workout Dashboard</h2>
+
+<div class="stats">
+    <div class="card">
+        <h3>Reps</h3>
+        <p id="repCount">0</p>
+    </div>
+
+    <div class="card">
+        <h3>Accuracy</h3>
+        <p id="accuracy">0%</p>
+    </div>
+</div>
+
+<canvas id="progressChart" width="400" height="200"></canvas>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+<section id="team">
+<h2>Team</h2>
+<p><b>Student:</b> Saiyyam Jain</p>
+<p><b>Guide:</b> Dr.Atul Kumar Verma</p>
+</section>
+
+<footer>
+<p>Manipal University Jaipur – CSE </p>
+</footer>
+
+<script src="app.js"></script>
+
+</body>
+</html>
