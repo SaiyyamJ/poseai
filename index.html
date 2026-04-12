@@ -1,94 +1,261 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PoseAI – Virtual Gym Trainer</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PoseAI – AI-Powered Virtual Gym Trainer</title>
+    <meta name="description"
+        content="PoseAI uses AI to analyze your gym form in real-time. Get instant feedback on exercise posture through your webcam. No sensors needed.">
 
-<link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Boldonse&family=Outfit:wght@400;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-<script src="https://cdn.jsdelivr.net/npm/@mediapipe/pose"></script>
-<script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils"></script>
-<script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils"></script>
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/pose"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils"></script>
 
 </head>
 
 <body>
 
-<header>
-    <h1>PoseAI</h1>
-    <p>AI Based Gym Form Correction System</p>
-</header>
+    <!-- Animated background particles -->
+    <div class="bg-particles" id="bgParticles"></div>
 
-<nav>
-    <a href="#about">About</a>
-    <a href="#demo">Live Demo</a>
-    <a href="#features">Features</a>
-    <a href="#team">Team</a>
-</nav>
+    <!-- Navigation -->
+    <nav id="main-nav">
+        <div class="nav-container">
+            <a href="#" class="nav-logo">
+                <i class="fas fa-dumbbell"></i>
+                <span>Pose<span class="accent">AI</span></span>
+            </a>
+            <div class="nav-links">
+                <a href="#about" class="nav-link">About</a>
+                <a href="#demo" class="nav-link">Live Demo</a>
+                <a href="#features" class="nav-link">Features</a>
+                <a href="#dashboard" class="nav-link">Dashboard</a>
+            </div>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
 
-<section id="about">
-<h2>About PoseAI</h2>
-<p>
-PoseAI is a virtual fitness trainer that analyzes human posture using AI.
-It detects incorrect form during exercises and gives real-time feedback using webcam.
-</p>
-</section>
+    <!-- Hero Section -->
+    <header id="hero">
+        <div class="hero-content">
+            <div class="hero-badge">
+                <i class="fas fa-bolt"></i> AI-Powered Fitness
+            </div>
+            <h1>Your Personal <span class="gradient-text">AI Gym Trainer</span></h1>
+            <p class="hero-subtitle">Real-time posture correction powered by advanced AI. Perfect your form, prevent
+                injuries, and maximize every rep — all through your webcam.</p>
+            <div class="hero-actions">
+                <a href="#demo" class="btn btn-primary" id="hero-start-btn">
+                    <i class="fas fa-play"></i> Start Training
+                </a>
+                <a href="#about" class="btn btn-outline" id="hero-learn-btn">
+                    <i class="fas fa-info-circle"></i> Learn More
+                </a>
+            </div>
+            <div class="hero-stats">
+                <div class="hero-stat">
+                    <span class="hero-stat-number">33</span>
+                    <span class="hero-stat-label">Pose Landmarks</span>
+                </div>
+                <div class="hero-stat-divider"></div>
+                <div class="hero-stat">
+                    <span class="hero-stat-number">60</span>
+                    <span class="hero-stat-label">FPS Detection</span>
+                </div>
+                <div class="hero-stat-divider"></div>
+                <div class="hero-stat">
+                    <span class="hero-stat-number">0</span>
+                    <span class="hero-stat-label">Sensors Needed</span>
+                </div>
+            </div>
+        </div>
+        <div class="hero-visual">
+            <div class="hero-glow"></div>
+        </div>
+    </header>
 
-<section id="demo">
-<h2>Live Posture Detection Demo</h2>
+    <!-- About Section -->
+    <section id="about" class="section">
+        <div class="section-container">
+            <div class="section-header">
+                <span class="section-tag"><i class="fas fa-heartbeat"></i> About PoseAI</span>
+                <h2>Train Smarter, <span class="gradient-text">Not Harder</span></h2>
+                <p class="section-desc">PoseAI is your intelligent fitness companion that watches your form so you can
+                    focus on your workout.</p>
+            </div>
+            <div class="about-grid">
+                <div class="about-card" id="about-card-1">
+                    <div class="about-icon"><i class="fas fa-eye"></i></div>
+                    <h3>AI Vision</h3>
+                    <p>Advanced computer vision analyzes your body posture in real-time, detecting 33 key body landmarks
+                        with precision.</p>
+                </div>
+                <div class="about-card" id="about-card-2">
+                    <div class="about-icon"><i class="fas fa-comments"></i></div>
+                    <h3>Instant Feedback</h3>
+                    <p>Receive immediate corrective feedback on your exercise form. Know exactly when to adjust your
+                        position.</p>
+                </div>
+                <div class="about-card" id="about-card-3">
+                    <div class="about-icon"><i class="fas fa-shield-alt"></i></div>
+                    <h3>Injury Prevention</h3>
+                    <p>Protect yourself from injuries caused by poor form. PoseAI catches mistakes before they cause
+                        harm.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<div class="demo-container">
-    <video class="input_video"></video>
-    <canvas class="output_canvas"></canvas>
-</div>
+    <!-- Demo Section -->
+    <section id="demo" class="section section-dark">
+        <div class="section-container">
+            <div class="section-header">
+                <span class="section-tag"><i class="fas fa-video"></i> Live Demo</span>
+                <h2>Real-Time <span class="gradient-text">Posture Detection</span></h2>
+                <p class="section-desc">Stand in front of your camera and start exercising — PoseAI will analyze your
+                    form instantly.</p>
+            </div>
 
-<p id="feedback">Stand in front of the camera</p>
+            <div class="demo-wrapper">
+                <div class="demo-container" id="demo-main-container">
+                    <div class="demo-overlay" id="demoOverlay">
+                        <i class="fas fa-camera fa-3x"></i>
+                        <p>Camera loading...</p>
+                    </div>
+                    <video class="input_video"></video>
+                    <canvas class="output_canvas"></canvas>
+                </div>
+                <div class="feedback-panel">
+                    <div class="feedback-header">
+                        <i class="fas fa-robot"></i> AI Feedback
+                    </div>
+                    <p id="feedback" class="feedback-text">
+                        <i class="fas fa-arrow-up"></i> Stand in front of the camera to begin
+                    </p>
+                    <div class="exercise-selector">
+                        <label for="exerciseType"><i class="fas fa-dumbbell"></i> Exercise Mode</label>
+                        <div class="exercise-badge" id="exerciseType">Squats</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-</section>
+    <!-- Dashboard Section -->
+    <section id="dashboard" class="section section-dark">
+        <div class="section-container">
+            <div class="section-header">
+                <span class="section-tag"><i class="fas fa-chart-bar"></i> Dashboard</span>
+                <h2>Your Workout <span class="gradient-text">Dashboard</span></h2>
+                <p class="section-desc">Track your reps, accuracy, and progress in real time.</p>
+            </div>
 
-<section id="features">
-<h2>Features</h2>
-<ul>
-<li>Real-time posture correction</li>
-<li>AI pose estimation using MediaPipe</li>
-<li>Joint angle calculation</li>
-<li>Adaptive feedback</li>
-<li>Works without sensors</li>
-</ul>
-</section>
-<section id="dashboard">
-<h2>Workout Dashboard</h2>
+            <div class="dashboard-grid">
+                <div class="stat-card" id="stat-reps">
+                    <div class="stat-icon"><i class="fas fa-fire"></i></div>
+                    <div class="stat-info">
+                        <span class="stat-label">Total Reps</span>
+                        <span class="stat-number" id="repCount">0</span>
+                    </div>
+                    <div class="stat-glow"></div>
+                </div>
+                <div class="stat-card" id="stat-accuracy">
+                    <div class="stat-icon"><i class="fas fa-bullseye"></i></div>
+                    <div class="stat-info">
+                        <span class="stat-label">Form Accuracy</span>
+                        <span class="stat-number" id="accuracy">0%</span>
+                    </div>
+                    <div class="stat-glow"></div>
+                </div>
+                <div class="stat-card" id="stat-stage">
+                    <div class="stat-icon"><i class="fas fa-arrows-alt-v"></i></div>
+                    <div class="stat-info">
+                        <span class="stat-label">Current Stage</span>
+                        <span class="stat-number" id="stageDisplay">—</span>
+                    </div>
+                    <div class="stat-glow"></div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<div class="stats">
-    <div class="card">
-        <h3>Reps</h3>
-        <p id="repCount">0</p>
-    </div>
+    <!-- Features Section -->
+    <section id="features" class="section">
+        <div class="section-container">
+            <div class="section-header">
+                <span class="section-tag"><i class="fas fa-star"></i> Features</span>
+                <h2>Why Choose <span class="gradient-text">PoseAI?</span></h2>
+                <p class="section-desc">Built with cutting-edge AI technology to give you the best training experience.
+                </p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card" id="feature-realtime">
+                    <div class="feature-icon"><i class="fas fa-bolt"></i></div>
+                    <h3>Real-Time Correction</h3>
+                    <p>Get instant posture feedback as you exercise. No delays, no waiting.</p>
+                </div>
+                <div class="feature-card" id="feature-ai">
+                    <div class="feature-icon"><i class="fas fa-brain"></i></div>
+                    <h3>AI Pose Estimation</h3>
+                    <p>Powered by Google's MediaPipe for accurate 33-point body tracking.</p>
+                </div>
+                <div class="feature-card" id="feature-angles">
+                    <div class="feature-icon"><i class="fas fa-ruler-combined"></i></div>
+                    <h3>Joint Angle Analysis</h3>
+                    <p>Precise angle calculations for hips, knees, and ankles to ensure perfect form.</p>
+                </div>
+                <div class="feature-card" id="feature-feedback">
+                    <div class="feature-icon"><i class="fas fa-chart-line"></i></div>
+                    <h3>Adaptive Feedback</h3>
+                    <p>Smart feedback that adjusts based on your performance and progress.</p>
+                </div>
+                <div class="feature-card" id="feature-nodevice">
+                    <div class="feature-icon"><i class="fas fa-laptop"></i></div>
+                    <h3>No Sensors Required</h3>
+                    <p>Just your webcam — no wearables, no special equipment needed.</p>
+                </div>
+                <div class="feature-card" id="feature-privacy">
+                    <div class="feature-icon"><i class="fas fa-lock"></i></div>
+                    <h3>Privacy First</h3>
+                    <p>All processing happens locally in your browser. No video is stored or sent.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <div class="card">
-        <h3>Accuracy</h3>
-        <p id="accuracy">0%</p>
-    </div>
-</div>
-
-<canvas id="progressChart" width="400" height="200"></canvas>
-</section>
-
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 
-<section id="team">
-<h2>Team</h2>
-<p><b>Student:</b> Saiyyam Jain</p>
-<p><b>Guide:</b> Dr.Atul Kumar Verma</p>
-</section>
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <i class="fas fa-dumbbell"></i>
+                <span>Pose<span class="accent">AI</span></span>
+            </div>
+            <p class="footer-text">Manipal University Jaipur – Department of Computer Science & Engineering</p>
+            <div class="footer-links">
+                <a href="#about">About</a>
+                <a href="#demo">Demo</a>
+                <a href="#features">Features</a>
+            </div>
+            <p class="footer-copyright">&copy; 2026 PoseAI. All rights reserved.</p>
+        </div>
+    </footer>
 
-<footer>
-<p>Manipal University Jaipur – CSE </p>
-</footer>
 
-<script src="app.js"></script>
+    <script src="app.js"></script>
 
 </body>
+
 </html>
